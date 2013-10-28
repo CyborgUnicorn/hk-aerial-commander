@@ -12,7 +12,7 @@ namespace RcMupper
 {
     public partial class Form1 : Form
     {
-        System.IO.Ports.SerialPort com8 = new System.IO.Ports.SerialPort("COM10");
+        System.IO.Ports.SerialPort com8 = new System.IO.Ports.SerialPort("COM8");
 
         public Form1()
         {
