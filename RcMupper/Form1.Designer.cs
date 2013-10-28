@@ -39,6 +39,8 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnEnumeratePorts = new System.Windows.Forms.Button();
+            this.cbPorts = new System.Windows.Forms.ComboBox();
             this.button14 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
@@ -54,8 +56,6 @@
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.button13 = new System.Windows.Forms.Button();
-            this.cbPorts = new System.Windows.Forms.ComboBox();
-            this.btnEnumeratePorts = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
@@ -184,6 +184,24 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Misc skrep";
             // 
+            // btnEnumeratePorts
+            // 
+            this.btnEnumeratePorts.Location = new System.Drawing.Point(6, 20);
+            this.btnEnumeratePorts.Name = "btnEnumeratePorts";
+            this.btnEnumeratePorts.Size = new System.Drawing.Size(21, 23);
+            this.btnEnumeratePorts.TabIndex = 15;
+            this.btnEnumeratePorts.Text = "¤";
+            this.btnEnumeratePorts.UseVisualStyleBackColor = true;
+            this.btnEnumeratePorts.Click += new System.EventHandler(this.btnEnumeratePorts_Click);
+            // 
+            // cbPorts
+            // 
+            this.cbPorts.FormattingEnabled = true;
+            this.cbPorts.Location = new System.Drawing.Point(33, 19);
+            this.cbPorts.Name = "cbPorts";
+            this.cbPorts.Size = new System.Drawing.Size(80, 21);
+            this.cbPorts.TabIndex = 14;
+            // 
             // button14
             // 
             this.button14.Location = new System.Drawing.Point(5, 406);
@@ -282,13 +300,13 @@
             // 
             this.trackBar4.Location = new System.Drawing.Point(250, 68);
             this.trackBar4.Maximum = 1850;
-            this.trackBar4.Minimum = 900;
+            this.trackBar4.Minimum = 1150;
             this.trackBar4.Name = "trackBar4";
             this.trackBar4.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar4.Size = new System.Drawing.Size(45, 287);
             this.trackBar4.TabIndex = 14;
             this.trackBar4.Tag = "";
-            this.trackBar4.Value = 1000;
+            this.trackBar4.Value = 1150;
             // 
             // button10
             // 
@@ -304,36 +322,36 @@
             // 
             this.trackBar3.Location = new System.Drawing.Point(166, 68);
             this.trackBar3.Maximum = 2000;
-            this.trackBar3.Minimum = 900;
+            this.trackBar3.Minimum = 1020;
             this.trackBar3.Name = "trackBar3";
             this.trackBar3.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar3.Size = new System.Drawing.Size(45, 287);
             this.trackBar3.TabIndex = 12;
-            this.trackBar3.Value = 1450;
+            this.trackBar3.Value = 1500;
             this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll);
             // 
             // trackBar2
             // 
             this.trackBar2.Location = new System.Drawing.Point(86, 68);
             this.trackBar2.Maximum = 2000;
-            this.trackBar2.Minimum = 900;
+            this.trackBar2.Minimum = 1020;
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar2.Size = new System.Drawing.Size(45, 287);
             this.trackBar2.TabIndex = 1;
-            this.trackBar2.Value = 1450;
+            this.trackBar2.Value = 1500;
             this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
             // 
             // trackBar1
             // 
             this.trackBar1.Location = new System.Drawing.Point(6, 68);
             this.trackBar1.Maximum = 2000;
-            this.trackBar1.Minimum = 900;
+            this.trackBar1.Minimum = 1020;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar1.Size = new System.Drawing.Size(45, 287);
             this.trackBar1.TabIndex = 0;
-            this.trackBar1.Value = 1450;
+            this.trackBar1.Value = 1500;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // button13
@@ -345,24 +363,6 @@
             this.button13.Text = "putt";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
-            // cbPorts
-            // 
-            this.cbPorts.FormattingEnabled = true;
-            this.cbPorts.Location = new System.Drawing.Point(33, 19);
-            this.cbPorts.Name = "cbPorts";
-            this.cbPorts.Size = new System.Drawing.Size(80, 21);
-            this.cbPorts.TabIndex = 14;
-            // 
-            // btnEnumeratePorts
-            // 
-            this.btnEnumeratePorts.Location = new System.Drawing.Point(6, 20);
-            this.btnEnumeratePorts.Name = "btnEnumeratePorts";
-            this.btnEnumeratePorts.Size = new System.Drawing.Size(21, 23);
-            this.btnEnumeratePorts.TabIndex = 15;
-            this.btnEnumeratePorts.Text = "¤";
-            this.btnEnumeratePorts.UseVisualStyleBackColor = true;
-            this.btnEnumeratePorts.Click += new System.EventHandler(this.btnEnumeratePorts_Click);
             // 
             // Form1
             // 

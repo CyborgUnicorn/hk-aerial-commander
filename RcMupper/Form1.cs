@@ -172,22 +172,22 @@ namespace RcMupper
             // 2. Header command
             // 3. Data
             // If offset > payload size = valid message
-            //byte[] exampleData = { 0x24, 0x4D, 0x3C, 0x10, 200, 200,
-            //    5, 222, 5, 221, 5, 244, 5, 223, 5, 222, 5, 221, 5, 212, 5, 214};
+            byte[] exampleData = { 0x24, 0x4D, 0x3C, 0x10, 200, 200,
+                5, 222, 5, 221, 5, 244, 5, 223, 5, 222, 5, 221, 5, 212, 5, 214};
 
             // 8 channel message
-            //byte[] result = { 0x24, 0x4D, 0x3C, 22, 200, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff };
+            byte[] result = { 0x24, 0x4D, 0x3C, 22, 200, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff };
 
             // 5 channel message
             //byte[] result = { 0x24, 0x4D, 0x3C, 22, 200, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff };
-            //System.Buffer.BlockCopy(payload, 0, result, 5, payload.Length);
+            System.Buffer.BlockCopy(payload, 0, result, 5, payload.Length);
 
             // Set payload length
             // +2 for the 200 200 after payload size in the header?
             //result[3] = (byte)(payload.Length); 
             
             // Write result
-            com.Write(payload, 0, payload.Length);
+            com.Write(result, 0, result.Length);
             this.UpdateText(payload);
 
             System.Threading.Thread.Sleep(50);
