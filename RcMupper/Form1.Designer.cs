@@ -46,6 +46,10 @@
             this.button11 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.trackBar6 = new System.Windows.Forms.TrackBar();
+            this.label5 = new System.Windows.Forms.Label();
+            this.trackBar5 = new System.Windows.Forms.TrackBar();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -56,12 +60,18 @@
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.button13 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblStatus1 = new System.Windows.Forms.Label();
+            this.button15 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -76,11 +86,11 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 12);
+            this.textBox1.Location = new System.Drawing.Point(12, 81);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(566, 536);
+            this.textBox1.Size = new System.Drawing.Size(566, 467);
             this.textBox1.TabIndex = 1;
             // 
             // textBox2
@@ -162,6 +172,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button15);
             this.groupBox1.Controls.Add(this.btnEnumeratePorts);
             this.groupBox1.Controls.Add(this.cbPorts);
             this.groupBox1.Controls.Add(this.button14);
@@ -204,7 +215,7 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(5, 406);
+            this.button14.Location = new System.Drawing.Point(6, 453);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(188, 26);
             this.button14.TabIndex = 13;
@@ -244,6 +255,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.trackBar6);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.trackBar5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
@@ -255,10 +270,52 @@
             this.groupBox2.Controls.Add(this.trackBar1);
             this.groupBox2.Location = new System.Drawing.Point(791, 13);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(428, 361);
+            this.groupBox2.Size = new System.Drawing.Size(536, 361);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Motor control";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(399, 49);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Servo 2";
+            // 
+            // trackBar6
+            // 
+            this.trackBar6.Location = new System.Drawing.Point(402, 68);
+            this.trackBar6.Maximum = 2000;
+            this.trackBar6.Minimum = 1000;
+            this.trackBar6.Name = "trackBar6";
+            this.trackBar6.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar6.Size = new System.Drawing.Size(45, 287);
+            this.trackBar6.TabIndex = 21;
+            this.trackBar6.Tag = "";
+            this.trackBar6.Value = 1000;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(328, 49);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 13);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Servo 1";
+            // 
+            // trackBar5
+            // 
+            this.trackBar5.Location = new System.Drawing.Point(331, 68);
+            this.trackBar5.Maximum = 2000;
+            this.trackBar5.Minimum = 1000;
+            this.trackBar5.Name = "trackBar5";
+            this.trackBar5.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar5.Size = new System.Drawing.Size(45, 287);
+            this.trackBar5.TabIndex = 19;
+            this.trackBar5.Tag = "";
+            this.trackBar5.Value = 1000;
             // 
             // label4
             // 
@@ -310,7 +367,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(347, 327);
+            this.button10.Location = new System.Drawing.Point(455, 325);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(75, 23);
             this.button10.TabIndex = 13;
@@ -328,7 +385,6 @@
             this.trackBar3.Size = new System.Drawing.Size(45, 287);
             this.trackBar3.TabIndex = 12;
             this.trackBar3.Value = 1500;
-            this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll);
             // 
             // trackBar2
             // 
@@ -340,7 +396,6 @@
             this.trackBar2.Size = new System.Drawing.Size(45, 287);
             this.trackBar2.TabIndex = 1;
             this.trackBar2.Value = 1500;
-            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
             // 
             // trackBar1
             // 
@@ -352,7 +407,6 @@
             this.trackBar1.Size = new System.Drawing.Size(45, 287);
             this.trackBar1.TabIndex = 0;
             this.trackBar1.Value = 1500;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // button13
             // 
@@ -364,25 +418,61 @@
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.lblStatus1);
+            this.groupBox3.Location = new System.Drawing.Point(12, 14);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(566, 49);
+            this.groupBox3.TabIndex = 20;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Wii status";
+            // 
+            // lblStatus1
+            // 
+            this.lblStatus1.AutoSize = true;
+            this.lblStatus1.Location = new System.Drawing.Point(7, 20);
+            this.lblStatus1.Name = "lblStatus1";
+            this.lblStatus1.Size = new System.Drawing.Size(53, 13);
+            this.lblStatus1.TabIndex = 0;
+            this.lblStatus1.Text = "lblStatus1";
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(5, 387);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(188, 26);
+            this.button15.TabIndex = 16;
+            this.button15.Text = "Qry atomic (MSP_ATOMIC_SERVO)";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1339, 562);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBox1);
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -418,6 +508,13 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button btnEnumeratePorts;
         private System.Windows.Forms.ComboBox cbPorts;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label lblStatus1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TrackBar trackBar5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TrackBar trackBar6;
+        private System.Windows.Forms.Button button15;
     }
 }
 
