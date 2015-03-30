@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 
+
 namespace RcMupper
 {
     public partial class Form1 : Form
@@ -165,6 +166,9 @@ namespace RcMupper
 
         private void SendMotorData(short roll, short pitch, short yaw, short throttle, short aux1 = 0, short aux2 = 0)
         {
+            if (throttle == 1150)
+                throttle = 0;
+
             byte[] bRoll = BitConverter.GetBytes(roll);
             byte[] bPitch = BitConverter.GetBytes(pitch);
             byte[] bYaw = BitConverter.GetBytes(yaw);
@@ -204,7 +208,7 @@ namespace RcMupper
             //result[3] = (byte)(payload.Length); 
             
             // Write result
-            com.Write(result, 0, result.Length);
+             com.Write(result, 0, result.Length);
             this.UpdateText(payload);
 
             //System.Threading.Thread.Sleep(50);
@@ -215,12 +219,12 @@ namespace RcMupper
             //this.UpdateText(data2);
         }
 
+        
         private void UpdateText(byte[] data)
         {
             if (data.Length < 1)
                 return;
 
-            var rc = data.ElementAt(4).Equals(105);
             var messageSize = data.ElementAt(3);
             var message = (data[2] == '<') ? "OUT: " : "IN: ";
             var dataStart = 5;
@@ -228,18 +232,69 @@ namespace RcMupper
             {
                 message += data.ElementAt(dataStart + i).ToString() + " ";
             }
-            this.Invoke((MethodInvoker)delegate { this.textBox1.Text += message + " " /*+ Encoding.ASCII.GetString(data)*/ + Environment.NewLine; this.textBox1.Invalidate(); });
-
-            if (rc)
+           
+            var msgId = data.ElementAt(4);
+            switch ( msgId )
             {
-                short roll = (short)((data[6] << 8) + data[5]);
-                short pitch = (short)((data[8] << 8) + data[7]);
-                short yaw = (short)((data[10] << 8) + data[9]);
-                short throttle = (short)((data[12] << 8) + data[11]);
-                short aux1 = (short)((data[14] << 8) + data[13]);
-                short aux2 = (short)((data[16] << 8) + data[15]);
+                case 105: // rc
+                {
+                    short roll = (short)((data[6] << 8) + data[5]);
+                    short pitch = (short)((data[8] << 8) + data[7]);
+                    short yaw = (short)((data[10] << 8) + data[9]);
+                    short throttle = (short)((data[12] << 8) + data[11]);
+                    short aux1 = (short)((data[14] << 8) + data[13]);
+                    short aux2 = (short)((data[16] << 8) + data[15]);
 
-                this.Invoke((MethodInvoker)delegate { this.lblStatus1.Text = string.Format("Roll: {0}, Pitch: {1}, Yaw: {2}, Throttle: {3}, Aux1: {4}, Aux2: {5}", roll, pitch, yaw, throttle, aux1, aux2); this.textBox1.Invalidate(); });
+                    this.Invoke((MethodInvoker)delegate { this.lblStatus1.Text = string.Format("Roll: {0}, Pitch: {1}, Yaw: {2}, Throttle: {3}, Aux1: {4}, Aux2: {5}", roll, pitch, yaw, throttle, aux1, aux2); this.textBox1.Invalidate(); });
+                } break;
+
+                case 13: // altitutude
+                {
+                    short alt = (short)((data[6] << 8) + data[5]);
+
+                    this.Invoke((MethodInvoker)delegate { this.textBox1.Text += "Altitude: " + alt + Environment.NewLine; this.textBox1.Invalidate(); this.textBox1.SelectionStart = this.textBox1.Text.Length; this.textBox1.ScrollToCaret(); });
+
+                } break;
+
+                case 14: // compass
+                {
+                    float SENSORS_GAUSS_TO_MICROTESLA = 100;                   // < Gauss to micro-Tesla multiplier
+                    //float _hmc5883_Gauss_LSB_XY = 670; //MagGain 2.5
+                    //float _hmc5883_Gauss_LSB_Z = 600; //MagGain 2.5
+
+                    float _hmc5883_Gauss_LSB_XY = 1100; //MagGain 1.3
+                    float _hmc5883_Gauss_LSB_Z = 980; //MagGain 1.3
+
+                    short magRoll_X = (short)((data[6] << 8) + data[5]);
+                    short magPitch_Y = (short)((data[8] << 8) + data[7]);
+                    short magYaw_Z = (short)((data[10] << 8) + data[9]);
+
+                    float X = (float)(magRoll_X / _hmc5883_Gauss_LSB_XY * SENSORS_GAUSS_TO_MICROTESLA);
+                    float Y = (float)(magPitch_Y / _hmc5883_Gauss_LSB_XY * SENSORS_GAUSS_TO_MICROTESLA);
+                    float Z = (float)(magYaw_Z / _hmc5883_Gauss_LSB_Z * SENSORS_GAUSS_TO_MICROTESLA);
+
+                    double heading = Math.Atan2((double)Y, (double)X);
+                    // Find yours here: http://www.magnetic-declination.com/
+                    double declinationAngle = 15 * (Math.PI / 180);
+                    heading += declinationAngle;
+
+                    if (heading < 0)
+                        heading += 2 * Math.PI;
+
+                    if (heading > 2 * Math.PI)
+                        heading -= 2 * Math.PI;
+
+                    // Convert radians to degrees for readability.
+                    double headingDegrees = heading * 180 / Math.PI;
+
+                    this.Invoke((MethodInvoker)delegate { this.textBox1.Text += string.Format("Roll: {0}, Pitch: {1}, Yaw: {2}, Heading: {3}", magRoll_X, magPitch_Y, magYaw_Z, headingDegrees) + Environment.NewLine; this.textBox1.Invalidate(); this.textBox1.SelectionStart = this.textBox1.Text.Length; this.textBox1.ScrollToCaret(); });
+
+                } break;
+
+                default:
+                {
+                    this.Invoke((MethodInvoker)delegate { this.textBox1.Text += message + " " /*+ Encoding.ASCII.GetString(data)*/ + Environment.NewLine; this.textBox1.Invalidate(); this.textBox1.SelectionStart = this.textBox1.Text.Length; this.textBox1.ScrollToCaret(); });
+                } break;
             }
         }
 
@@ -258,6 +313,62 @@ namespace RcMupper
         private void button15_Click(object sender, EventArgs e)
         {
             byte[] data = { 0x24, 0x4D, 0x3C, 0x00, 12, 12 };
+            com.Write(data, 0, data.Length);
+        }
+
+        private bool m_bLiveUpdate = true;
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            if (m_bLiveUpdate)
+                SendMotorData();
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            if (m_bLiveUpdate)
+                SendMotorData();
+        }
+
+        private void trackBar3_Scroll(object sender, EventArgs e)
+        {
+            if (m_bLiveUpdate)
+                SendMotorData();
+        }
+
+        private void trackBar4_Scroll(object sender, EventArgs e)
+        {
+            if (m_bLiveUpdate)
+                SendMotorData();
+        }
+
+        private void trackBar5_Scroll(object sender, EventArgs e)
+        {
+            if (m_bLiveUpdate)
+                SendMotorData();
+        }
+
+        private void trackBar6_Scroll(object sender, EventArgs e)
+        {
+            if (m_bLiveUpdate)
+                SendMotorData();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            this.trackBar5.Value = 1500;
+            this.trackBar6.Value = 1500;
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            byte[] data = { 0x24, 0x4D, 0x3C, 0x00, 13, 13 };
+            com.Write(data, 0, data.Length);
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            byte[] data = { 0x24, 0x4D, 0x3C, 0x00, 14, 14 };
             com.Write(data, 0, data.Length);
         }
 
